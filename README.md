@@ -1,51 +1,52 @@
-# 🛒 Pipeline ETL & Web Scraping - Dados de E-commerce
+# 🛒 ETL Pipeline & Web Scraping - E-commerce Data
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas)
 ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-Scraping-yellow?style=for-the-badge)
 
-## 📌 Visão Geral
+## 📌 Overview
 
-Este projeto consiste em um pipeline **ETL (Extract, Transform, Load)** desenvolvido para processar dados brutos de HTML de um e-commerce fictício. O objetivo é estruturar informações desorganizadas, aplicar regras de negócio para precificação e padronizar os dados para análise posterior.
+This project consists of an **ETL (Extract, Transform, Load)** pipeline developed to process raw HTML data from a fictional e-commerce site. The objective is to structure unorganized information, apply business rules for pricing, and standardize data for further analysis.
 
-O projeto simula um cenário real onde dados são extraídos do front-end ou de um crawler e precisam ser limpos antes de serem armazenados.
-
----
-
-## ⚙️ Arquitetura do Pipeline
-
-O processo foi dividido em três estágios clássicos de engenharia de dados:
-
-### 1. Extract (Extração)
-Utilizando a biblioteca **BeautifulSoup**, o script faz o parsing do HTML bruto (`HTML_DATA`).
-* **Filtro de Integridade:** Foi implementada uma regra rígida onde produtos sem a tag de preço (`<p class="price">`) são identificados e **descartados** imediatamente, gerando um log de alerta.
-* **Coleta:** Extração de ID, Nome, Preço bruto, Avaliação, Imagem, Data e Desconto.
-
-### 2. Transform (Transformação)
-Com os dados extraídos, utiliza-se **Pandas** e **Regex** para limpeza e tipagem:
-* **Limpeza de Strings:** Remoção de símbolos de moeda (`R$`) e percentuais (`% OFF`).
-* **Conversão de Tipos:** Transformação de preços e descontos para `float`.
-* **Normalização de Avaliação:** Conversão da escala "x/5.0" para uma escala percentual (0-100).
-* **Padronização de Data:** Alteração do formato `dd/mm/yyyy` para `dd-mm-yyyy`.
-* **Regra de Negócio:** Criação do campo calculado `preco_liquido`, aplicando o desconto sobre o valor original.
-
-### 3. Load (Carga)
-Os dados processados e estruturados são exportados para um arquivo CSV (`ofertas_calculadas.csv`), pronto para ser consumido por ferramentas de BI ou outros sistemas.
+The project simulates a real-world scenario where data is extracted from the front-end or a crawler and needs to be cleaned before being stored.
 
 ---
 
-📊 Resultados
+## ⚙️ Pipeline Architecture
 
-A partir de um HTML não estruturado, o pipeline gerou a seguinte estrutura tabular limpa:
+The process was divided into three classic data engineering stages:
 
-| nome | preco_numerico | desconto_percentual | preco_liquido | avaliacao_percentual | data |
+### 1. Extraction (Extract)
+Using the **BeautifulSoup** library, the script parses the raw HTML (`HTML_DATA`).
+* **Integrity Filter:** A strict rule was implemented where products without a price tag (`<p class="price">`) are identified and immediately **discarded**, generating an alert log.
+* **Collection:** Extraction of ID, Name, Raw Price, Rating, Image, Date, and Discount.
+
+### 2. Transformation (Transform)
+With the extracted data, **Pandas** and **Regex** are used for cleaning and typing:
+* **String Cleaning:** Removal of currency symbols (`R$`) and percentage signs (`% OFF`).
+* **Type Conversion:** Transformation of prices and discounts into `float`.
+* **Rating Normalization:** Conversion of the "x/5.0" scale to a percentage scale (0-100).
+* **Date Standardization:** Changing the format from `dd/mm/yyyy` to `dd-mm-yyyy`.
+* **Business Rule:** Creation of the calculated `net_price` field, applying the discount to the original value.
+
+### 3. Loading (Load)
+The processed and structured data is exported to a CSV file (`calculated_offers.csv`), ready to be consumed by BI tools or other systems.
+
+---
+
+## 📊 Results
+
+From unstructured HTML, the pipeline generated the following clean tabular structure:
+
+| name | numerical_price | discount_percentage | net_price | rating_percentage | date |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Smartphone X10 | 1999.99 | 10.0 | 1799.99 | 90.0 | 27-11-2025 |
 | Notebook Ultraline | 4500.00 | 0.0 | 4500.00 | 96.0 | 28-11-2025 |
-| Fone Bluetooth Pro | 549.50 | 5.0 | 522.02 | 78.0 | 28-11-2025 |
+| Bluetooth Pro Headphones | 549.50 | 5.0 | 522.02 | 78.0 | 28-11-2025 |
 | Smartwatch Z | 1250.00 | 20.0 | 1000.00 | 100.0 | 27-11-2025 |
 
+---
 
-👨‍💻 Autor
+### 👨‍💻 Author
 
-Alexander Lira Data Analyst | Python | Engenharia de Dados
+**Alexander Lira** Data Analyst | Python | Data Engineering
