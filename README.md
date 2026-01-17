@@ -50,3 +50,5 @@ From unstructured HTML, the pipeline generated the following clean tabular struc
 ### 👨‍💻 Author
 
 **Alexander Lira** Data Analyst | Python | Data Engineering
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alexanderblira/)
